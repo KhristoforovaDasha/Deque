@@ -366,7 +366,7 @@ void Deque<Type>::push_front(const Type& elem) {
 template<typename Type>
 void Deque<Type>::pop_back() noexcept {
 if (last_ == 0) {
---last_block_;
+  --last_block_;
 }
 last_ = (last_ + block - 1) % block;
 deque_[last_block_][last_].~Type();
@@ -410,10 +410,10 @@ void Deque<Type>::allocate() {
 
 template<typename Type>
 void Deque<Type>::delete_deque() noexcept {
-for (size_t i = 0; i < capacity_; ++i) {
-delete[] reinterpret_cast<uint8_t *>(deque_[i]);
-}
-delete[] deque_;
+  for (size_t i = 0; i < capacity_; ++i) {
+    delete[] reinterpret_cast<uint8_t *>(deque_[i]);
+  }
+  delete[] deque_;
 }
 
 template<typename Type>
